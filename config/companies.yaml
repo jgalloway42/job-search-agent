@@ -1,0 +1,90 @@
+companies:
+  - name: Stripe
+    tier: 1
+    ats: greenhouse
+    ats_slug: stripe
+    target_roles: ["Staff Data Scientist", "ML Engineer", "Data Scientist"]
+
+  - name: GitLab
+    tier: 1
+    ats: greenhouse
+    ats_slug: gitlab
+    target_roles: ["Senior Data Scientist", "Staff Data Scientist"]
+
+  - name: Datadog
+    tier: 1
+    ats: greenhouse
+    ats_slug: datadog
+    target_roles: ["Senior Data Scientist", "Staff Data Scientist", "ML Engineer"]
+
+  - name: Snowflake
+    tier: 1
+    ats: greenhouse
+    ats_slug: snowflake
+    target_roles: ["Principal Data Scientist", "Senior Data Scientist"]
+
+  - name: Databricks
+    tier: 1
+    ats: greenhouse
+    ats_slug: databricks
+    target_roles: ["Senior Data Scientist", "Staff Data Scientist"]
+
+  - name: HubSpot
+    tier: 2
+    ats: greenhouse
+    ats_slug: hubspot
+    target_roles: ["Principal Data Scientist", "Senior Data Scientist"]
+
+  - name: Klaviyo
+    tier: 2
+    ats: greenhouse
+    ats_slug: klaviyo
+    target_roles: ["Senior Data Scientist", "Staff Data Scientist"]
+
+  - name: DraftKings
+    tier: 2
+    ats: greenhouse
+    ats_slug: draftkings
+    target_roles: ["Senior Data Scientist"]
+
+  - name: Toast
+    tier: 2
+    ats: lever
+    ats_slug: toast
+    target_roles: ["Principal Data Scientist", "Senior Data Scientist"]
+
+  - name: Wayfair
+    tier: 2
+    ats: lever
+    ats_slug: wayfair
+    target_roles: ["Principal Data Scientist"]
+
+  - name: Honeywell
+    tier: 3
+    ats: workday
+    careers_url: "https://careers.honeywell.com"
+    target_roles: ["Principal Data Scientist", "Industrial AI"]
+
+  - name: GE Vernova
+    tier: 3
+    ats: workday
+    careers_url: "https://jobs.gecareers.com/vernova"
+    target_roles: ["Principal Data Scientist", "Energy Systems"]
+
+  - name: Eversource
+    tier: 3
+    ats: workday
+    careers_url: "https://jobs.eversource.com"
+    target_roles: ["Principal Data Scientist", "Grid Analytics"]
+
+  - name: Amazon
+    tier: 4
+    ats: scraper
+    careers_url: "https://www.amazon.jobs"
+    target_roles: ["OR Scientist", "Operations Research"]
+
+  - name: Uber
+    tier: 4
+    ats: scraper
+    careers_url: "https://www.uber.com/us/en/careers"
+    target_roles: ["OR Scientist", "Marketplace Optimization"]

@@ -1,0 +1,37 @@
+{
+  "name": "Job Search Agent",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+
+  "remoteEnv": {
+    "DB_PATH": "data/demo.db"
+  },
+
+  "postCreateCommand": "python -m venv .venv && .venv/bin/pip install -r requirements-dev.txt",
+
+  "forwardPorts": [8501],
+
+  "portsAttributes": {
+    "8501": {
+      "label": "Streamlit Dashboard",
+      "onAutoForward": "openBrowser"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.mypy-type-checker",
+        "charliermarsh.ruff",
+        "ms-toolsai.jupyter"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnSave": true
+        }
+      }
+    }
+  }
+}

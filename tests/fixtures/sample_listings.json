@@ -1,0 +1,94 @@
+{
+  "greenhouse": {
+    "jobs": [
+      {
+        "id": 7812341,
+        "title": "Staff Data Scientist, Risk",
+        "location": {
+          "name": "Remote, United States"
+        },
+        "absolute_url": "https://boards.greenhouse.io/stripe/jobs/7812341",
+        "updated_at": "2026-02-28T14:30:00.000Z",
+        "content": "<div class=\"content-intro\"><p>Stripe builds economic infrastructure for the internet. Our data science team uses statistical modeling, machine learning, and causal inference to improve our products and protect our users.</p></div><p><strong>About the role</strong></p><p>We're looking for a Staff Data Scientist to join our Risk team. You'll own the measurement and modeling work that underpins Stripe's fraud detection and risk decisioning systems. You'll work closely with engineering, product, and operations teams to build models that are both accurate and explainable.</p><p><strong>You'll do</strong></p><ul><li>Design and own end-to-end ML pipelines for fraud detection</li><li>Run A/B experiments to evaluate model and product changes</li><li>Develop causal inference frameworks for policy evaluation</li><li>Mentor senior data scientists and help set technical direction</li></ul><p><strong>You are</strong></p><ul><li>7+ years of experience in data science or ML engineering</li><li>Expert in Python, SQL, and ML frameworks (PyTorch, XGBoost, scikit-learn)</li><li>Strong background in statistical modeling and experimentation</li><li>Experience with large-scale data systems (Spark, BigQuery, or similar)</li></ul>",
+        "departments": [
+          {"id": 401, "name": "Data Science"}
+        ],
+        "offices": [
+          {"id": 501, "name": "Remote"}
+        ]
+      },
+      {
+        "id": 7812342,
+        "title": "Senior Data Scientist, Growth",
+        "location": {
+          "name": "San Francisco, CA or Remote"
+        },
+        "absolute_url": "https://boards.greenhouse.io/stripe/jobs/7812342",
+        "updated_at": "2026-02-25T10:00:00.000Z",
+        "content": "<p>We're looking for a Senior Data Scientist to join our Growth team. You'll drive measurement and insight across user acquisition, activation, and retention funnels using experimentation, causal inference, and predictive modeling.</p><p><strong>Requirements:</strong></p><ul><li>5+ years in data science or analytics</li><li>Strong SQL and Python skills</li><li>Experience designing and analyzing A/B tests</li><li>Familiarity with causal inference methods (diff-in-diff, synthetic control)</li></ul>",
+        "departments": [
+          {"id": 402, "name": "Growth"}
+        ],
+        "offices": [
+          {"id": 502, "name": "San Francisco"}
+        ]
+      },
+      {
+        "id": 7812343,
+        "title": "Software Engineer, Payments Infrastructure",
+        "location": {
+          "name": "New York, NY"
+        },
+        "absolute_url": "https://boards.greenhouse.io/stripe/jobs/7812343",
+        "updated_at": "2026-02-20T08:00:00.000Z",
+        "content": "<p>Join our Payments Infrastructure team to build the core systems that process billions of transactions annually.</p><ul><li>5+ years of software engineering experience</li><li>Proficiency in Go, Java, or Ruby</li></ul>",
+        "departments": [
+          {"id": 403, "name": "Engineering"}
+        ],
+        "offices": [
+          {"id": 503, "name": "New York"}
+        ]
+      }
+    ]
+  },
+  "lever": [
+    {
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "text": "Principal Data Scientist",
+      "hostedUrl": "https://jobs.lever.co/toast/a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "applyUrl": "https://jobs.lever.co/toast/a1b2c3d4-e5f6-7890-abcd-ef1234567890/apply",
+      "createdAt": 1740700800000,
+      "categories": {
+        "commitment": "Full-time",
+        "department": "Data & Analytics",
+        "location": "Boston, MA",
+        "team": "Data Science"
+      },
+      "tags": ["data science", "machine learning", "restaurant tech"],
+      "descriptionPlain": "Toast is looking for a Principal Data Scientist to lead our ML-driven personalization and recommendation systems. You'll set the technical direction for a team of data scientists and collaborate with product and engineering to build features that help restaurant operators run their businesses better.\n\nWhat you'll do:\n- Own the modeling roadmap for restaurant recommendation and demand forecasting\n- Lead a team of 3-4 senior and mid-level data scientists\n- Design and analyze large-scale A/B experiments\n- Partner with engineering to productionize models at scale\n\nWhat we're looking for:\n- 8+ years of data science or ML experience\n- Strong Python and SQL skills\n- Experience leading technical teams (player-coach preferred)\n- Domain knowledge in marketplace, e-commerce, or restaurant tech a plus",
+      "description": "<p>Toast is looking for a <strong>Principal Data Scientist</strong> to lead our ML-driven personalization and recommendation systems.</p><p><strong>What you'll do:</strong></p><ul><li>Own the modeling roadmap for restaurant recommendation and demand forecasting</li><li>Lead a team of 3-4 senior and mid-level data scientists</li><li>Design and analyze large-scale A/B experiments</li><li>Partner with engineering to productionize models at scale</li></ul><p><strong>What we're looking for:</strong></p><ul><li>8+ years of data science or ML experience</li><li>Strong Python and SQL skills</li><li>Experience leading technical teams (player-coach preferred)</li></ul>",
+      "lists": [
+        {
+          "text": "What you'll do:",
+          "content": "<li>Own the modeling roadmap</li><li>Lead a team of data scientists</li>"
+        }
+      ]
+    },
+    {
+      "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+      "text": "Senior Data Scientist, Marketplace",
+      "hostedUrl": "https://jobs.lever.co/toast/b2c3d4e5-f6a7-8901-bcde-f12345678901",
+      "applyUrl": "https://jobs.lever.co/toast/b2c3d4e5-f6a7-8901-bcde-f12345678901/apply",
+      "createdAt": 1740441600000,
+      "categories": {
+        "commitment": "Full-time",
+        "department": "Data & Analytics",
+        "location": "Boston, MA or Remote",
+        "team": "Data Science"
+      },
+      "tags": ["data science", "experimentation"],
+      "descriptionPlain": "We're looking for a Senior Data Scientist to join our Marketplace team. You'll build the models and measurement frameworks that power Toast's two-sided marketplace connecting restaurants with diners.\n\nRequirements:\n- 5+ years in data science\n- Strong experimentation background\n- Experience with marketplace dynamics or two-sided platforms\n- Python, SQL proficiency",
+      "description": "<p>We're looking for a <strong>Senior Data Scientist</strong> to join our Marketplace team.</p><ul><li>5+ years in data science</li><li>Strong experimentation background</li><li>Experience with marketplace dynamics</li></ul>"
+    }
+  ]
+}
