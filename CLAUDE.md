@@ -25,6 +25,7 @@ dashboard/app.py          — Streamlit UI (Codespaces port 8501)
 config/companies.yaml     — target companies, ATS type, target roles
 config/scoring_prompt.txt — active Gemini scoring prompt (auto-updated by learning pipeline)
 config/settings.py        — all env var loading via python-dotenv
+scripts/seed_demo.py      — one-off dev script: drops + recreates data/demo.db with fake data
 ```
 
 ---
@@ -50,6 +51,7 @@ Always use the ATS job ID (`job_id`) for deduplication. Never use title or URL �
 - All DB access goes through `database/db.py` — nodes never import `sqlite3` directly
 - DB path always comes from `settings.DB_PATH` (loaded from `DB_PATH` env var)
 - Never reference `data/jobs.db` or `data/demo.db` by name outside of `settings.py` and docs
+- **Exception:** `scripts/seed_demo.py` hardcodes `data/demo.db` intentionally — it is a dev-only tool that always targets the demo database regardless of env
 
 ### Secrets
 - Never hardcode secrets, paths, or magic strings
@@ -134,6 +136,28 @@ make seed-demo                            # regenerate data/demo.db
 - `weekly_agent.yml` — Monday 8am UTC, uses `DB_PATH=data/demo.db`
 - `devcontainer.json` — sets `DB_PATH=data/demo.db` so Codespaces always uses demo data
 - GitHub Secrets needed: `GEMINI_API_KEY`, `GMAIL_ADDRESS`, `GMAIL_APP_PASSWORD`, `DIGEST_EMAIL`, `SCORE_THRESHOLD`
+
+---
+
+## Local Development Environment
+
+### Virtual environment
+The project uses a `.venv` at the repo root (Python 3.12, gitignored).
+
+- **Codespaces / devcontainer:** venv is created automatically by `postCreateCommand`; VS Code activates it in every terminal via `python.defaultInterpreterPath`.
+- **Local machine (first time):**
+  ```bash
+  python -m venv .venv
+  source .venv/bin/activate
+  pip install -r requirements-dev.txt
+  ```
+- **Local machine (subsequent sessions):** `source .venv/bin/activate`
+
+### Minimum `.env` for Phase 2+ (database work)
+Only `DB_PATH` is required to run the database and CLI layers. Gemini/Gmail vars are needed from Phase 4/5 onward.
+```bash
+DB_PATH=data/jobs.db
+```
 
 ---
 
