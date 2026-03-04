@@ -26,4 +26,4 @@ def format_report(state: AgentState) -> dict:
     Returns:
         Partial state dict with 'report' key set to the HTML string.
     """
-    pass
+    ...

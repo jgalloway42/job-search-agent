@@ -22,4 +22,4 @@ def update_prompt(state: LearningState) -> dict:
     Returns:
         Partial state dict with 'new_prompt' key set to the written prompt text.
     """
-    pass
+    ...

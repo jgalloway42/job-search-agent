@@ -20,7 +20,7 @@ def build_graph() -> StateGraph:
     Returns:
         A compiled LangGraph StateGraph ready for invocation.
     """
-    pass
+    ...
 
 
 def run() -> None:

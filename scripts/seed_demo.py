@@ -97,10 +97,10 @@ def generate_jobs() -> list[dict]:
     for company in COMPANIES:
         # 13-14 jobs per company → ~200 total across 15 companies
         count = random.randint(12, 15)
-        slug = company["name"].lower().replace(" ", "-")
+        slug = str(company["name"]).lower().replace(" ", "-")
 
         for _ in range(count):
-            role = random.choice(company["roles"])
+            role: str = random.choice(company["roles"])  # type: ignore[arg-type]
             location = random.choice(LOCATIONS)
             first_seen = today - timedelta(days=random.randint(0, 90))
             posted = first_seen - timedelta(days=random.randint(0, 7))

@@ -19,4 +19,4 @@ def load_feedback(state: LearningState) -> dict:
     Returns:
         Partial state dict with 'applications' key populated.
     """
-    pass
+    ...

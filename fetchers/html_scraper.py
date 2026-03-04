@@ -8,6 +8,10 @@ Each company's scraper logic may need to be tailored. The normalize()
 method attempts a best-effort extraction of common HTML patterns.
 """
 
+import hashlib
+
+import requests
+from bs4 import BeautifulSoup
 
 from agent.state import JobListing
 from fetchers.base import BaseFetcher
@@ -39,7 +43,22 @@ class HtmlScraper(BaseFetcher):
             requests.HTTPError: On non-2xx responses.
             Exception: On parse failures. Caller handles as non-fatal.
         """
-        pass
+        response = requests.get(company["careers_url"], timeout=15)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, "html.parser")
+
+        raw_listings = []
+        for a in soup.find_all("a", href=True):
+            href = a["href"]
+            text = a.get_text(strip=True)
+            if not text or len(text) < 5:
+                continue
+            raw_listings.append({"title": text, "url": href, "location": "", "description": ""})
+
+        return [
+            {**self.normalize(raw), "company": company["name"], "tier": company["tier"]}
+            for raw in raw_listings
+        ]
 
     def normalize(self, raw: dict) -> JobListing:
         """Normalize a scraped job record to JobListing schema.
@@ -57,4 +76,16 @@ class HtmlScraper(BaseFetcher):
         Returns:
             Normalised JobListing dict. 'ats' is set to 'scraper'.
         """
-        pass
+        url = raw.get("url", "")
+        job_id = hashlib.md5(url.encode()).hexdigest() if url else ""
+        return {
+            "job_id": job_id,
+            "company": "",
+            "title": raw.get("title", ""),
+            "location": raw.get("location", ""),
+            "url": url,
+            "posted_date": "",
+            "description": raw.get("description", ""),
+            "tier": 0,
+            "ats": "scraper",
+        }

@@ -6,6 +6,9 @@ API endpoint (no auth required):
 Returns a JSON array of posting objects directly (no wrapper).
 """
 
+from datetime import datetime, timezone
+
+import requests
 
 from agent.state import JobListing
 from fetchers.base import BaseFetcher
@@ -29,7 +32,14 @@ class LeverFetcher(BaseFetcher):
         Returns:
             List of normalised JobListing dicts for all open positions.
         """
-        pass
+        url = LEVER_API_BASE.format(slug=company["ats_slug"])
+        response = requests.get(url)
+        response.raise_for_status()
+        postings = response.json()
+        return [
+            {**self.normalize(posting), "company": company["name"], "tier": company["tier"]}
+            for posting in postings
+        ]
 
     def normalize(self, raw: dict) -> JobListing:
         """Normalize a single Lever posting record to JobListing schema.
@@ -49,4 +59,24 @@ class LeverFetcher(BaseFetcher):
             Normalised JobListing dict. 'ats' is set to 'lever'.
             'company' and 'tier' are injected by the caller.
         """
-        pass
+        created_at = raw.get("createdAt", 0)
+        if created_at:
+            posted_date = (
+                datetime.fromtimestamp(created_at / 1000, tz=timezone.utc)
+                .date()
+                .isoformat()
+            )
+        else:
+            posted_date = ""
+
+        return {
+            "job_id": raw.get("id", ""),
+            "company": "",
+            "title": raw.get("text", ""),
+            "location": (raw.get("categories") or {}).get("location", ""),
+            "url": raw.get("hostedUrl", ""),
+            "posted_date": posted_date,
+            "description": raw.get("descriptionPlain") or raw.get("description") or "",
+            "tier": 0,
+            "ats": "lever",
+        }

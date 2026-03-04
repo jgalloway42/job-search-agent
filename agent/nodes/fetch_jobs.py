@@ -25,4 +25,4 @@ def fetch_jobs(state: AgentState) -> dict:
     Returns:
         Partial state dict with 'raw_listings' and 'errors' keys updated.
     """
-    pass
+    ...

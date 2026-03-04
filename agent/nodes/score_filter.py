@@ -28,4 +28,4 @@ def score_filter(state: AgentState) -> dict:
     Returns:
         Partial state dict with 'scored_jobs' and 'errors' keys updated.
     """
-    pass
+    ...

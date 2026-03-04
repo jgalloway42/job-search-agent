@@ -7,6 +7,7 @@ The 'content=true' parameter includes the full job description HTML,
 which is required for LLM scoring.
 """
 
+import requests
 
 from agent.state import JobListing
 from fetchers.base import BaseFetcher
@@ -31,7 +32,14 @@ class GreenhouseFetcher(BaseFetcher):
         Returns:
             List of normalised JobListing dicts for all open positions.
         """
-        pass
+        url = GREENHOUSE_API_BASE.format(slug=company["ats_slug"])
+        response = requests.get(url, params={"content": "true"})
+        response.raise_for_status()
+        jobs = response.json()["jobs"]
+        return [
+            {**self.normalize(job), "company": company["name"], "tier": company["tier"]}
+            for job in jobs
+        ]
 
     def normalize(self, raw: dict) -> JobListing:
         """Normalize a single Greenhouse job record to JobListing schema.
@@ -52,4 +60,14 @@ class GreenhouseFetcher(BaseFetcher):
             'company' and 'tier' must be injected by the caller (from
             the company config), as they are not in the API response.
         """
-        pass
+        return {
+            "job_id": str(raw["id"]),
+            "company": "",
+            "title": raw.get("title", ""),
+            "location": (raw.get("location") or {}).get("name", ""),
+            "url": raw.get("absolute_url", ""),
+            "posted_date": raw.get("updated_at", ""),
+            "description": raw.get("content") or "",
+            "tier": 0,
+            "ats": "greenhouse",
+        }

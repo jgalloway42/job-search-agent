@@ -23,4 +23,4 @@ def analyze_patterns(state: LearningState) -> dict:
     Returns:
         Partial state dict with 'analysis' key set to Gemini's response text.
     """
-    pass
+    ...
