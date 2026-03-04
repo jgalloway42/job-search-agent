@@ -1,7 +1,7 @@
 [tool.mypy]
 # Stub functions throughout the project use ... bodies intentionally.
 # The developer fills in implementations phase by phase.
-disable_error_code = ["empty-body"]
+disable_error_code = ["empty-body", "import-untyped"]
 
 [tool.ruff]
 target-version = "py312"

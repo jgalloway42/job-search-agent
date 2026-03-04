@@ -1,4 +1,4 @@
-.PHONY: run learn test lint apply outcome stats clean-today check-fetchers seed-demo
+.PHONY: run learn test lint apply outcome stats clean-today check-fetchers seed-demo dashboard
 
 # ── Daily agent ──────────────────────────────────────────────────────────────
 
@@ -51,3 +51,7 @@ check-fetchers:
 seed-demo:
 	## Regenerate data/demo.db with realistic fake data for portfolio demo
 	python scripts/seed_demo.py
+
+dashboard:
+	## Launch the Streamlit dashboard on port 8501
+	streamlit run dashboard/app.py

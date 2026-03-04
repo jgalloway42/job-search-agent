@@ -122,7 +122,7 @@ Jobs are fetched directly from each company's career page. Tier 1 and 2 companie
 ### Install
 
 ```bash
-git clone https://github.com/your-username/job-search-agent.git
+git clone https://github.com/jgalloway42/job-search-agent.git
 cd job-search-agent
 pip install -r requirements.txt
 ```
@@ -174,16 +174,13 @@ make stats
 ```
 
 ```
-📊 Job Search Stats (last 30 days)
-────────────────────────────────────
-Jobs surfaced:        147
-Jobs scored ≥6:        43
-Jobs applied:          12   (28% of qualified)
-Phone screens:          4   (33% response rate)
-Final rounds:           1
-Offers:                 0
-
-📈 Scoring prompt last updated: 2026-03-01
+Jobs surfaced:        199
+Jobs scored:          135
+Jobs qualified (>=6):  75
+Applied:               18
+Phone screens:          6   (33% response rate)
+Final rounds:           2
+Offers:                 1
 ```
 
 ---
