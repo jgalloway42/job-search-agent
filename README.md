@@ -243,6 +243,20 @@ Edit `config/companies.yaml`:
 
 ---
 
+## Troubleshooting
+
+### Gemini quota error on first run
+
+**Symptom:** The `score_filter` node fails with a quota or rate-limit error.
+
+**Cause:** On a first run (or after `make clean-today`), the agent may encounter 50–100 new jobs. Greenhouse and Lever responses include full HTML job descriptions — often thousands of tokens each. Batching all of them into one prompt can hit Gemini's free-tier tokens-per-minute (TPM) limit even though only one API call is made.
+
+**Fix:** Descriptions are truncated to 800 characters in `agent/nodes/score_filter.py` before the prompt is built. This reduces prompt size ~10x and should keep you well within the free tier on any normal run.
+
+**If it still recurs:** The next step would be splitting `deduplicated` into batches of ~30 jobs with a short sleep between calls. Open an issue if you hit this.
+
+---
+
 ## Full Specification
 
 See [SPEC.md](SPEC.md) for complete architecture documentation, all design decisions, database schema, and build phase plan.

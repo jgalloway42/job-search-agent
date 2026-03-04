@@ -205,6 +205,14 @@ Use `unittest.mock.patch` to mock external calls:
 
 ---
 
+## Known Issues
+
+See the **Troubleshooting** section in `README.md` for documented bugs and their fixes. Notable issues:
+
+- **Gemini TPM limit on first run** — descriptions truncated to 800 chars in `agent/nodes/score_filter.py` (line 54). See README for details.
+
+---
+
 ## Build Phase Reference
 
 Work through phases in order. Do not proceed to next phase without developer confirmation.

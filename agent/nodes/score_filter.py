@@ -51,7 +51,7 @@ def score_filter(state: AgentState) -> dict:
                 "title": job["title"],
                 "company": job["company"],
                 "location": job["location"],
-                "description": job.get("description", ""),
+                "description": job.get("description", "")[:800],
             }
             for job in state["deduplicated"]
         ]
