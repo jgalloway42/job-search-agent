@@ -169,6 +169,38 @@ DB_PATH=data/jobs.db
 - Mock Gmail SMTP — no real emails sent in tests
 - Each node should be testable in isolation with mocked state input
 
+### Implement → Test Loop
+
+Follow this pattern for every function, every phase:
+
+1. Read the stub docstring — it specifies the contract exactly
+2. Implement the function
+3. Run its specific test class: `pytest tests/test_db.py::TestInitDb -v`
+4. Move to the next function
+
+### Database tests (`tests/test_db.py`)
+
+Use pytest's `tmp_path` fixture for all DB tests — gives a real isolated temp file, no mocking needed:
+
+```python
+@pytest.fixture
+def db(tmp_path):
+    path = str(tmp_path / "test.db")
+    init_db(path)
+    return path
+```
+
+Run a single class while implementing: `pytest tests/test_db.py::TestIsSeen -v`
+Run all DB tests when done: `pytest tests/test_db.py -v`
+
+### Node/graph tests (`tests/test_nodes.py`, `tests/test_graph.py`)
+
+Use `unittest.mock.patch` to mock external calls:
+- HTTP fetchers: `patch("fetchers.greenhouse.requests.get")`
+- Gemini: `patch("langchain_google_genai.ChatGoogleGenerativeAI")`
+- SMTP: `patch("smtplib.SMTP")`
+- DB calls: pass `tmp_path`-based db_path through state
+
 ---
 
 ## Build Phase Reference
