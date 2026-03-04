@@ -54,4 +54,4 @@ seed-demo:
 
 dashboard:
 	## Launch the Streamlit dashboard on port 8501
-	streamlit run dashboard/app.py
+	PYTHONPATH=. streamlit run dashboard/app.py
