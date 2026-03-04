@@ -22,20 +22,23 @@ def _require(name: str) -> str:
     Raises:
         EnvironmentError: If the variable is not set or is empty.
     """
-    pass
+    val = os.getenv(name)
+    if not val:
+        raise EnvironmentError(f"Missing required environment variable: {name}")
+    return val
 
 
 # --- Secrets ---
 
-GEMINI_API_KEY: str
-GMAIL_ADDRESS: str
-GMAIL_APP_PASSWORD: str
-DIGEST_EMAIL: str
+GEMINI_API_KEY: str = _require("GEMINI_API_KEY")
+GMAIL_ADDRESS: str = _require("GMAIL_ADDRESS")
+GMAIL_APP_PASSWORD: str = _require("GMAIL_APP_PASSWORD")
+DIGEST_EMAIL: str = _require("DIGEST_EMAIL")
 
 # --- Tuning ---
 
-SCORE_THRESHOLD: int  # minimum fit score (1-10) to include in digest, default 6
+SCORE_THRESHOLD: int = int(os.getenv("SCORE_THRESHOLD", "6"))
 
 # --- Paths ---
 
-DB_PATH: str  # resolved from DB_PATH env var — never hardcoded
+DB_PATH: str = _require("DB_PATH")

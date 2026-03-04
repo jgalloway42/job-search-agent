@@ -207,11 +207,11 @@ Use `unittest.mock.patch` to mock external calls:
 
 Work through phases in order. Do not proceed to next phase without developer confirmation.
 
-| Phase | Focus |
-|-------|-------|
-| 1 | Scaffold — state, config, settings, gitignore, Makefile stubs |
-| 2 | Database — db.py, schema, seed-demo |
-| 3 | Fetchers — base, greenhouse, lever, html_scraper |
+| Phase | Focus | Status |
+|-------|-------|--------|
+| 1 | Scaffold — state, config, settings, gitignore, Makefile stubs | ✅ Done |
+| 2 | Database — db.py, schema, seed-demo | ✅ Done |
+| 3 | Fetchers — base, greenhouse, lever, html_scraper | Pending |
 | 4 | Daily agent — graph.py + 4 nodes |
 | 5 | Notifications — email.py, HTML template |
 | 6 | CLI — log.py, apply/outcome/stats |

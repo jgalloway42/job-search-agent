@@ -11,6 +11,7 @@ Schema:
 """
 
 import sqlite3
+from datetime import date
 from typing import Any
 
 from agent.state import JobListing
@@ -32,7 +33,30 @@ def init_db(db_path: str) -> None:
         db_path: Filesystem path to the SQLite database file. Will be
                  created if it does not exist.
     """
-    pass
+    with sqlite3.connect(db_path) as conn:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS jobs (
+                job_id TEXT PRIMARY KEY,
+                company TEXT NOT NULL,
+                title TEXT NOT NULL,
+                location TEXT,
+                url TEXT NOT NULL,
+                posted_date TEXT,
+                tier INTEGER,
+                ats TEXT,
+                fit_score INTEGER,
+                score_reason TEXT,
+                first_seen_date TEXT NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS applications (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                job_id TEXT NOT NULL REFERENCES jobs(job_id),
+                applied_date TEXT NOT NULL,
+                outcome TEXT DEFAULT NULL,
+                outcome_date TEXT DEFAULT NULL,
+                notes TEXT DEFAULT NULL
+            );
+        """)
 
 
 def is_seen(db_path: str, job_id: str) -> bool:
@@ -45,7 +69,9 @@ def is_seen(db_path: str, job_id: str) -> bool:
     Returns:
         True if the job_id exists in the jobs table, False otherwise.
     """
-    pass
+    with sqlite3.connect(db_path) as conn:
+        row = conn.execute("SELECT 1 FROM jobs WHERE job_id = ?", (job_id,)).fetchone()
+    return row is not None
 
 
 def insert_jobs(db_path: str, jobs: list[JobListing]) -> None:
@@ -60,7 +86,17 @@ def insert_jobs(db_path: str, jobs: list[JobListing]) -> None:
               score_reason are NULL at insert time; they are updated
               after LLM scoring if needed.
     """
-    pass
+    today = date.today().isoformat()
+    with sqlite3.connect(db_path) as conn:
+        conn.executemany(
+            """
+            INSERT OR IGNORE INTO jobs
+                (job_id, company, title, location, url, posted_date, tier, ats, first_seen_date)
+            VALUES
+                (:job_id, :company, :title, :location, :url, :posted_date, :tier, :ats, :first_seen_date)
+            """,
+            [{**job, "first_seen_date": today} for job in jobs],
+        )
 
 
 def log_application(db_path: str, job_id: str) -> None:
@@ -77,7 +113,13 @@ def log_application(db_path: str, job_id: str) -> None:
     Raises:
         ValueError: If job_id does not exist in the jobs table.
     """
-    pass
+    if not is_seen(db_path, job_id):
+        raise ValueError(f"job_id '{job_id}' not found in jobs table")
+    with sqlite3.connect(db_path) as conn:
+        conn.execute(
+            "INSERT INTO applications (job_id, applied_date) VALUES (?, ?)",
+            (job_id, date.today().isoformat()),
+        )
 
 
 def update_outcome(db_path: str, job_id: str, outcome: str) -> None:
@@ -95,7 +137,20 @@ def update_outcome(db_path: str, job_id: str, outcome: str) -> None:
         ValueError: If outcome is not one of the valid values.
         ValueError: If no application exists for this job_id.
     """
-    pass
+    valid = {"phone_screen", "final_round", "offer", "rejected"}
+    if outcome not in valid:
+        raise ValueError(f"Invalid outcome '{outcome}'. Must be one of: {valid}")
+    with sqlite3.connect(db_path) as conn:
+        cursor = conn.execute(
+            """
+            UPDATE applications
+               SET outcome = ?, outcome_date = ?
+             WHERE job_id = ?
+            """,
+            (outcome, date.today().isoformat(), job_id),
+        )
+    if cursor.rowcount == 0:
+        raise ValueError(f"No application found for job_id '{job_id}'")
 
 
 def get_all_applications(db_path: str) -> list[dict]:
@@ -110,7 +165,18 @@ def get_all_applications(db_path: str) -> list[dict]:
     Returns:
         List of dicts, one per application row. Empty list if no applications.
     """
-    pass
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute(
+            """
+            SELECT a.id, a.job_id, a.applied_date, a.outcome, a.outcome_date, a.notes,
+                   j.company, j.title, j.tier, j.fit_score, j.score_reason, j.url
+              FROM applications a
+              JOIN jobs j USING (job_id)
+             ORDER BY a.applied_date DESC
+            """
+        ).fetchall()
+    return [dict(row) for row in rows]
 
 
 def get_stats(db_path: str) -> dict[str, Any]:
@@ -131,4 +197,18 @@ def get_stats(db_path: str) -> dict[str, Any]:
     Returns:
         Dict with the above keys and integer values.
     """
-    pass
+    from config.settings import SCORE_THRESHOLD
+
+    with sqlite3.connect(db_path) as conn:
+        def count(query, params=()):
+            return conn.execute(query, params).fetchone()[0]
+
+        return {
+            "jobs_surfaced": count("SELECT COUNT(*) FROM jobs"),
+            "jobs_scored":   count("SELECT COUNT(*) FROM jobs WHERE fit_score IS NOT NULL"),
+            "jobs_qualified": count("SELECT COUNT(*) FROM jobs WHERE fit_score >= ?", (SCORE_THRESHOLD,)),
+            "applied":       count("SELECT COUNT(*) FROM applications"),
+            "phone_screens": count("SELECT COUNT(*) FROM applications WHERE outcome = 'phone_screen'"),
+            "final_rounds":  count("SELECT COUNT(*) FROM applications WHERE outcome = 'final_round'"),
+            "offers":        count("SELECT COUNT(*) FROM applications WHERE outcome = 'offer'"),
+        }
