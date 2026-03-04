@@ -1,6 +1,8 @@
 """Node: load all application records and outcomes from the database."""
 
-from learning.graph import LearningState
+import config.settings as settings
+import database.db as db
+from learning.state import LearningState
 
 
 def load_feedback(state: LearningState) -> dict:
@@ -19,4 +21,11 @@ def load_feedback(state: LearningState) -> dict:
     Returns:
         Partial state dict with 'applications' key populated.
     """
-    ...
+    errors: list[str] = list(state.get("errors", []))
+
+    try:
+        applications = db.get_all_applications(settings.DB_PATH)
+        return {"applications": applications, "errors": errors}
+    except Exception as e:
+        errors.append(f"load_feedback error: {e}")
+        return {"applications": [], "errors": errors}

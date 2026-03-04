@@ -95,12 +95,13 @@ job-search-agent/
 │   └── nodes/
 │       ├── load_feedback.py        # load applications + outcomes from DB
 │       ├── analyze_patterns.py     # Gemini analyzes what applied jobs had in common
-│       └── update_prompt.py        # rewrites config/scoring_prompt.txt
+│       └── update_prompt.py        # rewrites config/scoring_prompt.txt, archives to history
 │
 ├── config/
 │   ├── companies.yaml              # target companies, ATS type, roles
 │   ├── settings.py                 # loads all env vars via python-dotenv
-│   └── scoring_prompt.txt          # current scoring prompt (auto-updated by learning pipeline)
+│   ├── scoring_prompt.txt          # current scoring prompt (auto-updated by learning pipeline)
+│   └── prompt_history.json         # last 5 scoring prompts, newest first (rollback archive)
 │
 ├── notifications/
 │   ├── __init__.py
@@ -201,10 +202,14 @@ START
   │
 [analyze_patterns]  — Gemini analyzes patterns: what applied/responded jobs had in common
   │
-[update_prompt]     — rewrites config/scoring_prompt.txt with refined criteria
+[update_prompt]     — archives current prompt to config/prompt_history.json (max 5 entries, newest first)
+                    — rewrites config/scoring_prompt.txt with refined criteria
+                    — on error, both files are left intact (non-fatal)
   │
 END
 ```
+
+To roll back a prompt update: copy any `prompt` entry from `config/prompt_history.json` back into `config/scoring_prompt.txt`.
 
 ---
 

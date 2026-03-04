@@ -24,6 +24,7 @@ cli/log.py                — application + outcome logging
 dashboard/app.py          — Streamlit UI (Codespaces port 8501)
 config/companies.yaml     — target companies, ATS type, target roles
 config/scoring_prompt.txt — active Gemini scoring prompt (auto-updated by learning pipeline)
+config/prompt_history.json — last 5 scoring prompts, newest first (rollback: copy entry back to scoring_prompt.txt)
 config/settings.py        — all env var loading via python-dotenv
 scripts/seed_demo.py      — one-off dev script: drops + recreates data/demo.db with fake data
 ```
@@ -45,6 +46,7 @@ Always use the ATS job ID (`job_id`) for deduplication. Never use title or URL �
 - Batch all jobs into a single Gemini prompt per run — never one API call per job
 - Scoring prompt is always loaded from `config/scoring_prompt.txt` at runtime, never hardcoded
 - Use `ChatGoogleGenerativeAI` from LangChain — not the raw `google-generativeai` SDK directly
+- When the learning pipeline rewrites the scoring prompt, it first archives the current version to `config/prompt_history.json` (max 5 entries, newest first) — rollback by copying any entry's `prompt` field back to `scoring_prompt.txt`
 
 ### Database
 - Use raw `sqlite3` from Python stdlib — no SQLAlchemy or other ORM
@@ -213,9 +215,9 @@ Work through phases in order. Do not proceed to next phase without developer con
 | 2 | Database — db.py, schema, seed-demo | ✅ Done |
 | 3 | Fetchers — base, greenhouse, lever, html_scraper | ✅ Done |
 | 4 | Daily agent — graph.py + 4 nodes | ✅ Done |
-| 5 | Notifications — email.py, HTML template |
-| 6 | CLI — log.py, apply/outcome/stats |
-| 7 | Learning pipeline — learning/ graph + 3 nodes |
+| 5 | Notifications — email.py, HTML template | ✅ Done |
+| 6 | CLI — log.py, apply/outcome/stats | ✅ Done |
+| 7 | Learning pipeline — learning/ graph + 3 nodes + prompt_history.json | ✅ Done |
 | 8 | CI/CD — workflows, devcontainer |
 | 9 | Dashboard — Streamlit, port 8501 |
 | 10 | Polish — README, architecture diagram, seeded demo.db |
