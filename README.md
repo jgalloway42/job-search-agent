@@ -1,3 +1,5 @@
+[![CI](https://github.com/jgalloway42/job-search-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/jgalloway42/job-search-agent/actions/workflows/ci.yml)
+
 # job-search-agent
 
 A self-improving LangGraph agent that monitors target company career pages daily, scores job listings for relevance using Google Gemini, and delivers a digest email with direct apply links. Logs application outcomes to refine its own scoring over time.

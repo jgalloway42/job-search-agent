@@ -5,6 +5,9 @@ normalises results to JobListing schema, and accumulates non-fatal errors.
 """
 
 from agent.state import AgentState
+from fetchers.greenhouse import GreenhouseFetcher
+from fetchers.html_scraper import HtmlScraper
+from fetchers.lever import LeverFetcher
 
 
 def fetch_jobs(state: AgentState) -> dict:
@@ -25,4 +28,21 @@ def fetch_jobs(state: AgentState) -> dict:
     Returns:
         Partial state dict with 'raw_listings' and 'errors' keys updated.
     """
-    ...
+    raw_listings: list[dict] = []
+    errors: list[str] = list(state.get("errors", []))
+
+    for company in state["companies"]:
+        try:
+            ats = company.get("ats", "")
+            if ats == "greenhouse":
+                fetcher = GreenhouseFetcher()
+            elif ats == "lever":
+                fetcher = LeverFetcher()
+            else:
+                fetcher = HtmlScraper()
+            listings = fetcher.fetch(company)
+            raw_listings.extend(listings)
+        except Exception as e:
+            errors.append(f"{company['name']}: {e}")
+
+    return {"raw_listings": raw_listings, "errors": errors}

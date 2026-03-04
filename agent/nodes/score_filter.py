@@ -5,7 +5,16 @@ The scoring prompt is loaded from config/scoring_prompt.txt at runtime.
 Jobs below settings.SCORE_THRESHOLD are filtered out.
 """
 
+import json
+from pathlib import Path
+
+from langchain_core.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+import config.settings as settings
 from agent.state import AgentState
+
+_PROMPT_PATH = Path(__file__).parent.parent.parent / "config" / "scoring_prompt.txt"
 
 
 def score_filter(state: AgentState) -> dict:
@@ -28,4 +37,49 @@ def score_filter(state: AgentState) -> dict:
     Returns:
         Partial state dict with 'scored_jobs' and 'errors' keys updated.
     """
-    ...
+    errors: list[str] = list(state.get("errors", []))
+
+    if not state["deduplicated"]:
+        return {"scored_jobs": [], "errors": errors}
+
+    try:
+        prompt_text = _PROMPT_PATH.read_text()
+
+        jobs_payload = [
+            {
+                "job_id": job["job_id"],
+                "title": job["title"],
+                "company": job["company"],
+                "location": job["location"],
+                "description": job.get("description", ""),
+            }
+            for job in state["deduplicated"]
+        ]
+
+        llm = ChatGoogleGenerativeAI(
+            model="gemini-2.0-flash",
+            google_api_key=settings.GEMINI_API_KEY,
+        )
+        message = HumanMessage(content=f"{prompt_text}\n\n{json.dumps(jobs_payload)}")
+        response = llm.invoke([message])
+
+        scores = json.loads(response.content)
+        score_map = {item["job_id"]: item for item in scores}
+
+        scored_jobs = []
+        for job in state["deduplicated"]:
+            score_data = score_map.get(job["job_id"])
+            if score_data:
+                job_with_score = {
+                    **job,
+                    "fit_score": score_data["fit_score"],
+                    "reason": score_data["reason"],
+                }
+                if job_with_score["fit_score"] >= settings.SCORE_THRESHOLD:
+                    scored_jobs.append(job_with_score)
+
+        return {"scored_jobs": scored_jobs, "errors": errors}
+
+    except Exception as e:
+        errors.append(f"Gemini scoring error: {e}")
+        return {"scored_jobs": [], "errors": errors}

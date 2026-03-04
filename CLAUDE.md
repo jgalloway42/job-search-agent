@@ -211,8 +211,8 @@ Work through phases in order. Do not proceed to next phase without developer con
 |-------|-------|--------|
 | 1 | Scaffold — state, config, settings, gitignore, Makefile stubs | ✅ Done |
 | 2 | Database — db.py, schema, seed-demo | ✅ Done |
-| 3 | Fetchers — base, greenhouse, lever, html_scraper | Pending |
-| 4 | Daily agent — graph.py + 4 nodes |
+| 3 | Fetchers — base, greenhouse, lever, html_scraper | ✅ Done |
+| 4 | Daily agent — graph.py + 4 nodes | ✅ Done |
 | 5 | Notifications — email.py, HTML template |
 | 6 | CLI — log.py, apply/outcome/stats |
 | 7 | Learning pipeline — learning/ graph + 3 nodes |
