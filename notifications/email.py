@@ -5,9 +5,6 @@ Credentials are loaded from settings (never hardcoded). No third-party
 email library is required.
 """
 
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 
 
 def send_digest(subject: str, html_body: str) -> None:

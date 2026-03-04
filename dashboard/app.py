@@ -7,7 +7,6 @@ Start with:
     streamlit run dashboard/app.py
 """
 
-import streamlit as st
 
 
 def render_stats_section() -> None:

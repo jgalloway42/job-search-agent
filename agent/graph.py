@@ -6,7 +6,6 @@ then trigger the email digest via notifications/email.py.
 
 from langgraph.graph import StateGraph
 
-from agent.state import AgentState
 
 
 def build_graph() -> StateGraph:

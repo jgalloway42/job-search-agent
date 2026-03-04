@@ -6,13 +6,9 @@ Tests validate normalization logic, error handling, and job_id extraction.
 
 import json
 from pathlib import Path
-from unittest.mock import MagicMock, patch
 
 import pytest
 
-from fetchers.greenhouse import GreenhouseFetcher
-from fetchers.lever import LeverFetcher
-from fetchers.html_scraper import HtmlScraper
 
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"

@@ -6,7 +6,6 @@ API endpoint (no auth required):
 Returns a JSON array of posting objects directly (no wrapper).
 """
 
-import requests
 
 from agent.state import JobListing
 from fetchers.base import BaseFetcher

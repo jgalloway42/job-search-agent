@@ -5,7 +5,6 @@ external dependencies (DB, HTTP, Gemini). No live API calls in CI.
 """
 
 import pytest
-from unittest.mock import MagicMock, patch
 
 from agent.state import AgentState
 

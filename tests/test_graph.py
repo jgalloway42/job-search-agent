@@ -4,8 +4,6 @@ Tests that the graph compiles correctly and that nodes are wired in the
 right sequence. All external calls (HTTP, DB, Gemini, SMTP) are mocked.
 """
 
-import pytest
-from unittest.mock import MagicMock, patch
 
 
 class TestBuildGraph:

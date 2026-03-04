@@ -8,8 +8,6 @@ Each company's scraper logic may need to be tailored. The normalize()
 method attempts a best-effort extraction of common HTML patterns.
 """
 
-import requests
-from bs4 import BeautifulSoup
 
 from agent.state import JobListing
 from fetchers.base import BaseFetcher

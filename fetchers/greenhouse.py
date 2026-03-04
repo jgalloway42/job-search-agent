@@ -7,7 +7,6 @@ The 'content=true' parameter includes the full job description HTML,
 which is required for LLM scoring.
 """
 
-import requests
 
 from agent.state import JobListing
 from fetchers.base import BaseFetcher
