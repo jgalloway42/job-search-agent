@@ -50,4 +50,4 @@ check-fetchers:
 
 seed-demo:
 	## Regenerate data/demo.db with realistic fake data for portfolio demo
-	python -m cli.log seed-demo
+	python scripts/seed_demo.py
