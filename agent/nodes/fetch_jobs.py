@@ -4,7 +4,8 @@ Dispatches to the correct fetcher based on each company's 'ats' field,
 normalises results to JobListing schema, and accumulates non-fatal errors.
 """
 
-from agent.state import AgentState
+from agent.state import AgentState, JobListing
+from fetchers.base import BaseFetcher
 from fetchers.greenhouse import GreenhouseFetcher
 from fetchers.html_scraper import HtmlScraper
 from fetchers.lever import LeverFetcher
@@ -28,12 +29,13 @@ def fetch_jobs(state: AgentState) -> dict:
     Returns:
         Partial state dict with 'raw_listings' and 'errors' keys updated.
     """
-    raw_listings: list[dict] = []
+    raw_listings: list[JobListing] = []
     errors: list[str] = list(state.get("errors", []))
 
     for company in state["companies"]:
         try:
             ats = company.get("ats", "")
+            fetcher: BaseFetcher
             if ats == "greenhouse":
                 fetcher = GreenhouseFetcher()
             elif ats == "lever":

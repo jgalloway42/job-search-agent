@@ -4,9 +4,11 @@ Uses the ATS job_id as the deduplication key. Never uses title or URL,
 as both can change without the underlying job changing.
 """
 
+from typing import cast
+
 import config.settings as settings
 import database.db as db
-from agent.state import AgentState
+from agent.state import AgentState, JobListing
 
 
 def deduplicate(state: AgentState) -> dict:
@@ -25,12 +27,12 @@ def deduplicate(state: AgentState) -> dict:
         Partial state dict with 'deduplicated' and 'errors' keys updated.
     """
     errors: list[str] = list(state.get("errors", []))
-    new_jobs: list[dict] = []
+    new_jobs: list[JobListing] = []
 
     for job in state["raw_listings"]:
         try:
             if not db.is_seen(settings.DB_PATH, job["job_id"]):
-                new_jobs.append(job)
+                new_jobs.append(cast(JobListing, job))
         except Exception as e:
             errors.append(f"Dedup error for {job.get('job_id', 'unknown')}: {e}")
 

@@ -179,6 +179,24 @@ def get_all_applications(db_path: str) -> list[dict]:
     return [dict(row) for row in rows]
 
 
+def clean_today(db_path: str) -> int:
+    """Delete all jobs first seen today, allowing the pipeline to re-run fresh.
+
+    Removes rows from the jobs table where first_seen_date equals today's
+    UTC date, so the next pipeline run treats them as unseen and re-fetches.
+
+    Args:
+        db_path: Path to the SQLite database file.
+
+    Returns:
+        Number of rows deleted.
+    """
+    today = date.today().isoformat()
+    with sqlite3.connect(db_path) as conn:
+        cursor = conn.execute("DELETE FROM jobs WHERE first_seen_date = ?", (today,))
+    return cursor.rowcount
+
+
 def get_stats(db_path: str) -> dict[str, Any]:
     """Return funnel summary statistics for the current database.
 

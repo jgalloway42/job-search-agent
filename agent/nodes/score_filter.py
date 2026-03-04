@@ -63,7 +63,7 @@ def score_filter(state: AgentState) -> dict:
         message = HumanMessage(content=f"{prompt_text}\n\n{json.dumps(jobs_payload)}")
         response = llm.invoke([message])
 
-        scores = json.loads(response.content)
+        scores = json.loads(str(response.content))
         score_map = {item["job_id"]: item for item in scores}
 
         scored_jobs = []
