@@ -59,7 +59,7 @@ def run() -> None:
     invokes the compiled graph, and calls the email sender with state["report"].
     """
     with open("config/companies.yaml") as f:
-        companies = yaml.safe_load(f)
+        companies = yaml.safe_load(f)["companies"]
 
     db.init_db(settings.DB_PATH)
 
@@ -72,14 +72,22 @@ def run() -> None:
         errors=[],
     )
 
+    print(f"Starting daily agent — {len(companies)} companies, DB: {settings.DB_PATH}")
     compiled = build_graph()
     final_state = compiled.invoke(initial_state)
 
     from notifications.email import send_digest
 
     match_count = len(final_state.get("scored_jobs", []))
+    errors = final_state.get("errors", [])
     subject = f"Job Digest {date.today().isoformat()} — {match_count} matches"
+    print(f"Pipeline complete — {match_count} matches found, {len(errors)} errors")
+    if errors:
+        for err in errors:
+            print(f"  [error] {err}")
+    print("Sending digest email...")
     send_digest(subject, final_state["report"])
+    print("Done.")
 
 
 if __name__ == "__main__":

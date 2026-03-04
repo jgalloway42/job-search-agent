@@ -108,7 +108,7 @@ Companies are configured in `config/companies.yaml` across four tiers:
 | 3 | Energy / Industrial | Honeywell, GE Vernova, Eversource |
 | 4 | Operations Research | Amazon, Uber |
 
-Jobs are fetched directly from each company's career page. Tier 1 and 2 companies mostly use Greenhouse or Lever — both have free, stable JSON APIs. Tier 3 and 4 use a BeautifulSoup HTML scraper as fallback.
+Jobs are fetched directly from each company's career page using Greenhouse or Lever JSON APIs where available, Workday for others, and a BeautifulSoup HTML scraper as fallback.
 
 ---
 

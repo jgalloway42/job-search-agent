@@ -19,8 +19,8 @@ companies:
 
   - name: Snowflake
     tier: 1
-    ats: greenhouse
-    ats_slug: snowflake
+    ats: workday
+    careers_url: "https://careers.snowflake.com/us/en"
     target_roles: ["Principal Data Scientist", "Senior Data Scientist"]
 
   - name: Databricks
@@ -43,20 +43,20 @@ companies:
 
   - name: DraftKings
     tier: 2
-    ats: greenhouse
-    ats_slug: draftkings
+    ats: workday
+    careers_url: "https://draftkings.wd1.myworkdayjobs.com/en-US/DraftKings"
     target_roles: ["Senior Data Scientist"]
 
   - name: Toast
     tier: 2
-    ats: lever
+    ats: greenhouse
     ats_slug: toast
     target_roles: ["Principal Data Scientist", "Senior Data Scientist"]
 
   - name: Wayfair
     tier: 2
-    ats: lever
-    ats_slug: wayfair
+    ats: scraper
+    careers_url: "https://www.wayfair.com/careers/tech"
     target_roles: ["Principal Data Scientist"]
 
   - name: Honeywell
