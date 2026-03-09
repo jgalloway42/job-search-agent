@@ -122,10 +122,14 @@ Jobs are fetched directly from each company's career page using Greenhouse or Le
 ### Install
 
 ```bash
-git clone https://github.com/jgalloway42/job-search-agent.git
+git clone git@github.com:jgalloway42/job-search-agent.git
 cd job-search-agent
 pip install -r requirements.txt
 ```
+
+> **SSH note:** this repo uses SSH for git. You'll need an SSH key added to your GitHub account.
+> Generate one with `ssh-keygen -t ed25519 -C "your@email.com"`, then add `~/.ssh/id_ed25519.pub`
+> at [github.com/settings/keys](https://github.com/settings/keys).
 
 ### Configure
 
