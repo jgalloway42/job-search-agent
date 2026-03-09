@@ -31,6 +31,7 @@ def fetch_jobs(state: AgentState) -> dict:
     """
     raw_listings: list[JobListing] = []
     errors: list[str] = list(state.get("errors", []))
+    failed_companies: list[dict] = []
 
     for company in state["companies"]:
         try:
@@ -46,5 +47,6 @@ def fetch_jobs(state: AgentState) -> dict:
             raw_listings.extend(listings)
         except Exception as e:
             errors.append(f"{company['name']}: {e}")
+            failed_companies.append(company)
 
-    return {"raw_listings": raw_listings, "errors": errors}
+    return {"raw_listings": raw_listings, "errors": errors, "failed_companies": failed_companies}

@@ -58,7 +58,7 @@ Rewrite the scoring prompt to incorporate the insights above. Requirements:
 - Return ONLY the full updated prompt text, nothing else"""
 
         llm = ChatGoogleGenerativeAI(
-            model="gemini-2.0-flash",
+            model="gemini-2.5-flash",
             google_api_key=settings.GEMINI_API_KEY,
         )
         response = llm.invoke([HumanMessage(content=rewrite_prompt)])

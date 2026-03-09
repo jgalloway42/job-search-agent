@@ -3,88 +3,130 @@ companies:
     tier: 1
     ats: greenhouse
     ats_slug: stripe
-    target_roles: ["Staff Data Scientist", "ML Engineer", "Data Scientist"]
+    target_roles: ["Staff Data Scientist", "ML Engineer", "Data Scientist", "Senior AI Architect", "Staff AI Architect", "Principal AI Architect"]
 
   - name: GitLab
     tier: 1
     ats: greenhouse
     ats_slug: gitlab
-    target_roles: ["Senior Data Scientist", "Staff Data Scientist"]
+    target_roles: ["Senior Data Scientist", "Staff Data Scientist", "Senior AI Architect", "Staff AI Architect", "Principal AI Architect"]
 
   - name: Datadog
     tier: 1
     ats: greenhouse
     ats_slug: datadog
-    target_roles: ["Senior Data Scientist", "Staff Data Scientist", "ML Engineer"]
+    target_roles: ["Senior Data Scientist", "Staff Data Scientist", "ML Engineer", "Senior AI Architect", "Staff AI Architect", "Principal AI Architect"]
 
   - name: Snowflake
     tier: 1
     ats: workday
     careers_url: "https://careers.snowflake.com/us/en"
-    target_roles: ["Principal Data Scientist", "Senior Data Scientist"]
+    target_roles: ["Principal Data Scientist", "Senior Data Scientist", "Senior AI Architect", "Staff AI Architect", "Principal AI Architect"]
 
   - name: Databricks
     tier: 1
     ats: greenhouse
     ats_slug: databricks
-    target_roles: ["Senior Data Scientist", "Staff Data Scientist"]
+    target_roles: ["Senior Data Scientist", "Staff Data Scientist", "Senior AI Architect", "Staff AI Architect", "Principal AI Architect"]
 
   - name: HubSpot
     tier: 2
     ats: greenhouse
     ats_slug: hubspot
-    target_roles: ["Principal Data Scientist", "Senior Data Scientist"]
+    target_roles: ["Principal Data Scientist", "Senior Data Scientist", "Senior AI Architect", "Staff AI Architect", "Principal AI Architect"]
 
   - name: Klaviyo
     tier: 2
     ats: greenhouse
     ats_slug: klaviyo
-    target_roles: ["Senior Data Scientist", "Staff Data Scientist"]
+    target_roles: ["Senior Data Scientist", "Staff Data Scientist", "Senior AI Architect", "Staff AI Architect", "Principal AI Architect"]
 
   - name: DraftKings
     tier: 2
     ats: workday
     careers_url: "https://draftkings.wd1.myworkdayjobs.com/en-US/DraftKings"
-    target_roles: ["Senior Data Scientist"]
+    target_roles: ["Senior Data Scientist", "Senior AI Architect", "Principal AI Architect"]
 
   - name: Toast
     tier: 2
     ats: greenhouse
     ats_slug: toast
-    target_roles: ["Principal Data Scientist", "Senior Data Scientist"]
+    target_roles: ["Principal Data Scientist", "Senior Data Scientist", "Senior AI Architect", "Staff AI Architect", "Principal AI Architect"]
 
   - name: Wayfair
     tier: 2
     ats: scraper
     careers_url: "https://www.wayfair.com/careers/tech"
-    target_roles: ["Principal Data Scientist"]
+    target_roles: ["Principal Data Scientist", "Senior AI Architect", "Principal AI Architect"]
 
   - name: Honeywell
     tier: 3
     ats: workday
     careers_url: "https://careers.honeywell.com"
-    target_roles: ["Principal Data Scientist", "Industrial AI"]
+    target_roles: ["Principal Data Scientist", "Industrial AI", "Senior AI Architect", "Principal AI Architect"]
 
   - name: GE Vernova
     tier: 3
     ats: workday
     careers_url: "https://jobs.gecareers.com/vernova"
-    target_roles: ["Principal Data Scientist", "Energy Systems"]
+    target_roles: ["Principal Data Scientist", "Energy Systems", "Senior AI Architect", "Principal AI Architect"]
 
   - name: Eversource
     tier: 3
     ats: workday
     careers_url: "https://jobs.eversource.com"
-    target_roles: ["Principal Data Scientist", "Grid Analytics"]
+    target_roles: ["Principal Data Scientist", "Grid Analytics", "Senior AI Architect", "Principal AI Architect"]
 
   - name: Amazon
     tier: 4
     ats: scraper
     careers_url: "https://www.amazon.jobs"
-    target_roles: ["OR Scientist", "Operations Research"]
+    target_roles: ["Applied Scientist", "Operations Research", "Senior AI Architect", "Principal AI Architect"]
 
   - name: Uber
     tier: 4
     ats: scraper
     careers_url: "https://www.uber.com/us/en/careers"
-    target_roles: ["OR Scientist", "Marketplace Optimization"]
+    target_roles: ["OR Scientist", "Marketplace Optimization", "Senior AI Architect", "Principal AI Architect"]
+
+  - name: AspenTech
+    tier: 2
+    ats: workday
+    careers_url: "https://aspentech.wd5.myworkdayjobs.com/aspentech"
+    target_roles: ["Consultant","Senior Data Scientist", "Principal Data Scientist", "ML Engineer", "Senior AI Architect", "Principal AI Architect", "Process Optimization"]
+
+  - name: Commonwealth Fusion Systems
+    tier: 1
+    ats: lever
+    ats_slug: cfsenergy
+    target_roles: ["Senior Data Scientist", "Principal Data Scientist", "ML Engineer", "Senior AI Architect", "Principal AI Architect", "Simulation"]
+
+  - name: Moderna
+    tier: 2
+    ats: workday
+    careers_url: "https://modernatx.wd1.myworkdayjobs.com/M_tx"
+    target_roles: ["Senior Data Scientist", "Principal Data Scientist", "ML Engineer", "Senior AI Architect", "Principal AI Architect", "Process Analytics"]
+
+  - name: Form Energy
+    tier: 2
+    ats: scraper
+    careers_url: "https://formenergy.com/careers/open-jobs/"
+    target_roles: ["Senior Data Scientist", "Principal Data Scientist", "ML Engineer", "Senior AI Architect", "Principal AI Architect", "Energy Storage"]
+
+  - name: Siemens
+    tier: 3
+    ats: scraper
+    careers_url: "https://jobs.siemens.com/en_US/externaljobs/SearchJobs"
+    target_roles: ["Senior Data Scientist", "Principal Data Scientist", "ML Engineer", "Senior AI Architect", "Principal AI Architect", "Industrial AI"]
+
+  - name: Siemens Energy
+    tier: 3
+    ats: scraper
+    careers_url: "https://jobs.siemens-energy.com/en_US/jobs/SearchJobsUS"
+    target_roles: ["Senior Data Scientist", "Principal Data Scientist", "ML Engineer", "Senior AI Architect", "Principal AI Architect", "Energy Systems"]
+
+  - name: Siemens Digital Industries Software
+    tier: 3
+    ats: scraper
+    careers_url: "https://jobs.sw.siemens.com/jobs/"
+    target_roles: ["Senior Data Scientist", "Principal Data Scientist", "ML Engineer", "Senior AI Architect", "Principal AI Architect", "Industrial AI"]

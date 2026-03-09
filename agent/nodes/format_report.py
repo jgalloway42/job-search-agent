@@ -30,9 +30,10 @@ def format_report(state: AgentState) -> dict:
     """
     scored_jobs: list[dict] = state.get("scored_jobs", [])
     errors: list[str] = state.get("errors", [])
+    failed_companies: list[dict] = state.get("failed_companies", [])
 
     if not scored_jobs:
-        return {"report": _no_matches_html(errors)}
+        return {"report": _no_matches_html(errors, failed_companies)}
 
     by_tier: dict[int, list[dict]] = defaultdict(list)
     for job in scored_jobs:
@@ -45,6 +46,7 @@ def format_report(state: AgentState) -> dict:
         'max-width:700px;margin:auto;padding:20px;">'
         "<h1>Job Search Digest</h1>"
         + "".join(sections)
+        + _manual_check_section(failed_companies)
         + _errors_footer(errors)
         + "</body></html>"
     )
@@ -70,14 +72,39 @@ def _render_card(job: dict) -> str:
     )
 
 
-def _no_matches_html(errors: list[str]) -> str:
+def _no_matches_html(errors: list[str], failed_companies: list[dict]) -> str:
     return (
         '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;'
         'max-width:700px;margin:auto;padding:20px;">'
         "<h1>Job Search Digest</h1>"
         "<p>No new matching jobs today.</p>"
+        + _manual_check_section(failed_companies)
         + _errors_footer(errors)
         + "</body></html>"
+    )
+
+
+def _manual_check_section(failed_companies: list[dict]) -> str:
+    if not failed_companies:
+        return ""
+    items = ""
+    for company in failed_companies:
+        name = company.get("name", "Unknown")
+        url = company.get("careers_url") or ""
+        if not url and company.get("ats_slug"):
+            ats = company.get("ats", "")
+            slug = company["ats_slug"]
+            if ats == "greenhouse":
+                url = f"https://boards.greenhouse.io/{slug}"
+            elif ats == "lever":
+                url = f"https://jobs.lever.co/{slug}"
+        link = f'<a href="{url}" style="color:#0066cc;">{name}</a>' if url else name
+        items += f"<li>{link}</li>"
+    return (
+        '<div style="margin-top:32px;border-top:2px solid #eee;padding-top:16px;">'
+        '<h2 style="color:#555;">Check Manually</h2>'
+        "<p style=\"color:#666;font-size:14px;\">These companies couldn't be scraped automatically:</p>"
+        f"<ul>{items}</ul></div>"
     )
 
 

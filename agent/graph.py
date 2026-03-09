@@ -70,6 +70,7 @@ def run() -> None:
         scored_jobs=[],
         report="",
         errors=[],
+        failed_companies=[],
     )
 
     print(f"Starting daily agent — {len(companies)} companies, DB: {settings.DB_PATH}")

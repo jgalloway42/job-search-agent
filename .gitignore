@@ -3,6 +3,7 @@
 
 # Local Claude Code instructions — personal, not committed
 CLAUDE.md
+.claude/
 
 # Real application data — never commit (use data/demo.db for portfolio)
 data/jobs.db

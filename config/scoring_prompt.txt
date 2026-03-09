@@ -2,7 +2,7 @@ You are a job-fit scoring assistant. Score each job listing for fit with the can
 
 ## Candidate Profile
 
-- **Target roles:** Senior Data Scientist, Staff Data Scientist, Principal Data Scientist, ML Engineer, OR Scientist
+- **Target roles:** Senior Data Scientist, Staff Data Scientist, Principal Data Scientist, ML Engineer, OR Scientist, Senior AI Architect, Staff AI Architect, Principal AI Architect
 - **Experience level:** 7+ years in data science, machine learning, or operations research
 - **Technical strengths:** Python, SQL, machine learning (scikit-learn, PyTorch, XGBoost), statistical modeling, A/B experimentation, causal inference, optimization (linear programming, simulation), LLM/GenAI applications
 - **Domain strengths:** Product analytics, marketplace/platform economics, pricing optimization, fraud detection, recommendation systems, energy systems, industrial AI

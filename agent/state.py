@@ -34,3 +34,4 @@ class AgentState(TypedDict):
     scored_jobs: list[dict]     # each job dict extended with fit_score + reason
     report: str                 # final HTML digest string
     errors: list[str]           # non-fatal per-company/per-job error messages
+    failed_companies: list[dict]  # company dicts that failed to fetch (for manual review)

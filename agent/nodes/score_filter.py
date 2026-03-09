@@ -57,13 +57,14 @@ def score_filter(state: AgentState) -> dict:
         ]
 
         llm = ChatGoogleGenerativeAI(
-            model="gemini-2.0-flash",
+            model="gemini-2.5-flash",
             google_api_key=settings.GEMINI_API_KEY,
         )
         message = HumanMessage(content=f"{prompt_text}\n\n{json.dumps(jobs_payload)}")
         response = llm.invoke([message])
 
-        scores = json.loads(str(response.content))
+        raw = str(response.content).strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
+        scores = json.loads(raw)
         score_map = {item["job_id"]: item for item in scores}
 
         scored_jobs = []
