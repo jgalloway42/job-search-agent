@@ -1,6 +1,9 @@
 # Secrets — never commit
 .env
 
+# Local Claude Code instructions — personal, not committed
+CLAUDE.md
+
 # Real application data — never commit (use data/demo.db for portfolio)
 data/jobs.db
 
