@@ -23,6 +23,7 @@ def base_state() -> AgentState:
         scored_jobs=[],
         report="",
         errors=[],
+        failed_companies=[],
     )
 
 
