@@ -55,3 +55,8 @@ seed-demo:
 dashboard:
 	## Launch the Streamlit dashboard on port 8501
 	PYTHONPATH=. streamlit run dashboard/app.py
+
+# ── install dependencies ─────────────────────────────────────────────────────────────
+
+install:
+	pip install -r requirements.txt -r requirements-dev.txt
